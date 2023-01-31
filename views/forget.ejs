@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <div class="logo">
+		<a href="/" class="logo"> <i class="fas fa-book"></i> <span>Bookly</span> </a>
+	</div>
+
+	<form id="form2" method="post">
+		<div class="container">
+			<h1>Change Password</h1>
+			<hr>
+
+			<label for="email"><b>Email</b></label>
+			<input type="text" placeholder="Enter Email" name="email" >
+
+			<label for="psw"><b>Password</b></label>
+			<input type="password" placeholder="Enter New Password" name="password" >
+
+            <label for="psw"><b>Confirm Password</b></label>
+			<input type="password" placeholder="Confirm New Password" name="passwordConf" >
+
+			<div class="clearfix">
+				<button type="submit" class="signupbtn">Confirm</button>
+			</div>
+		</div>
+	</form>
+
+	<div class="mssg bg-danger">
+		<span id="check" ></span>
+	</div>
+
+	<div id="LangTable">
+		<a href="/login" id="login"></a>
+	</div>
+
+	<div style="text-align: center;">
+		<span>Login</span>
+		<a style="color: dodgerblue;" href="/login">here</a>
+	</div>
+
+	<form style="text-align: center;" action="/" method="get">
+		<button class="cancelbtn">Cancel</button>
+	</form>
+
+    <script type="text/javascript">
+		$(document).ready(function(){
+
+			$( "#form2" ).submit(function(event) {
+
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/forget',
+					data: $('#form2').serialize(),
+					dataType: "json",
+					success: function(response){
+						//alert("a");
+						//console.log(response.Success);
+						$('#form2')[0].reset();
+						//alert("abc");
+						document.getElementById("check").innerHTML=response.Success;
+
+						setTimeout(function(){
+							document.getElementById("check").innerHTML="";
+						},3000);
+						if (response.Success=="Password changed!") {
+							document.getElementById("login").click();
+						};
+					},
+					error: function() {
+					}
+				})
+			});
+
+		});
+	</script>
+</body>
+</html>

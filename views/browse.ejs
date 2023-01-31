@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/9152a2c21e.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="browse.css">
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            if(!<%=isLoggedIn%>){
+                var buttons = document.getElementsByClassName("hide");
+                for(let i = 0; i < buttons.length; i++){
+                    buttons[i].style.display = 'none';
+                }
+                document.getElementById("upload").style.display = 'none';
+                document.getElementById("view").style.display = 'none';
+                document.getElementById("cart").style.display = 'none';
+            }
+            else{
+                if("<%=role%>" == "user"){
+                    var buttons = document.getElementsByClassName("hide");
+                    for(let i = 0; i < buttons.length; i++){
+                        buttons[i].style.display = 'none';
+                    }
+                    document.getElementById("upload").style.display = 'none';
+                    document.getElementById("view").style.display = 'none';
+                }
+                if("<%=role%>" == "admin"){
+                    document.getElementById("cart").style.display = "none";
+                }
+            }
+        })
+    </script>
+</head>
+<body>
+    <!-- Header Section starts -->
+    <header class="header">
+
+        <!-- Header 1 -->
+        <div class="header-1">
+            <a href="#" class="logo"> <i class="fas fa-book"></i> bookly </a>
+
+            
+
+            <div class="icons">
+                
+                <form method="get" action="shoppingcart" id="cart">
+                    <button id="login-btn" class="fas fa-shopping-cart"></button>
+                </form>
+                <form method="get" action="adminupload" id="upload">
+                    <button id="login-btn" class="fas fa-upload"></button>
+                </form>
+                <form method="get" action="profile">
+                    <button id="login-btn" class="fas fa-user"></button>
+                </form>
+                <form method="get" action="users" id="view">
+                    <button id="login-btn" class="fa-solid fa-users-viewfinder"></button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Header 2 -->
+        <div class="header-2">
+            <nav class="navbar">
+                <form action="/" method="get">
+                    <button>home</button>
+                </form>
+                <form action="browse" method="get">
+                    <button>browse</button>
+                </form>
+            </nav>
+        </div>
+    </header>
+    <!-- Header section ends -->
+
+    <!-- Products section starts -->
+    <section id="product1">
+        <div>
+            <div class="pro-container">
+
+                <% products.forEach(entries  =>{ %>
+                    
+                    <div class="pro">
+                        <img src="/images/<%=entries.path%>">
+                        <div class="des">
+                            <span>novel</span>
+                            <h4><%=entries.name%></h4>
+                            <h4><%=entries.author%></h4>
+                            <div class="star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3>$<%=entries.price%></h3>
+                        </div>
+                        <form action="addtocart/<%=entries._id%>" method="get">
+                            <button class="button1"><i class="fas fa-shopping-cart"></i></button>
+                        </form>
+                        <form action="deleteitem/<%=entries._id%>" method="post" class="hide">
+                            <button class="fa-solid fa-trash-can button2"></button>
+                        </form>
+                    </div>
+    
+                <% }) %>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

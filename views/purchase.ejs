@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <link rel="stylesheet" href="purchase.css">
+    <script src="https://kit.fontawesome.com/9152a2c21e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Header Section starts -->
+    <header class="header">
+
+        <!-- Header 1 -->
+        <div class="header-1">
+            <a href="#" class="logo"> <i class="fas fa-book"></i> bookly </a>
+
+            
+
+            <div class="icons">
+                <form method="get" action="shoppingcart">
+                    <button id="login-btn" class="fas fa-shopping-cart"></button>
+                </form>
+                <form method="get" action="logout">
+                    <button id="login-btn" class="fa-solid fa-right-from-bracket"></button>
+                </form>
+                <form method="get" action="profile" id="profile">
+                    <button id="login-btn" class="fa-solid fa-user"></button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Header 2 -->
+        <div class="header-2">
+            <nav class="navbar">
+                <form action="/" method="get">
+                    <button>home</button>
+                </form>
+                <form action="browse" method="get">
+                    <button>browse</button>
+                </form>
+            </nav>
+        </div>
+    </header>
+    <!-- Header section ends -->
+
+    <table>
+        <thead>
+            <th>User ID</th>
+            <th>Order ID</th>
+            <th>Order Date</th>
+        </thead>
+
+        <tbody>
+                <% orders.forEach(order =>{ %>
+                    <tr>
+                        <td><%=order.userId%></td>
+                        <td><%=order.orderId%></td>
+                        <td><%=order.date%></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+       
+    </table>
+
+     <!-- footer section starts  -->
+
+     <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>our locations</h3>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> india </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> USA </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> russia </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> france </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> japan </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> africa </a>
+            </div>
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="#home"> <i class="fas fa-arrow-right"></i> home </a>
+                <a href="#"><i class="fas fa-arrow-right"></i> browse </a>
+                <a href="#arrivals"> <i class="fas fa-arrow-right"></i> arrivals </a>
+                <a href="#reviews"> <i class="fas fa-arrow-right"></i> reviews </a>
+            </div>
+
+            <div class="box">
+                <h3>extra links</h3>
+                <a href="#"> <i class="fas fa-arrow-right"></i> account info </a>
+                <a href="#"> <i class="fas fa-arrow-right"></i> ordered items </a>
+                <a href="#"> <i class="fas fa-arrow-right"></i> privacy policy </a>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+                <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+                <a href="#"> <i class="fas fa-envelope"></i> bookly@gmail.com </a>
+
+            </div>
+
+        </div>
+
+        <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin"></a>
+            <a href="#" class="fab fa-pinterest"></a>
+        </div>
+
+    </section>
+
+    
+</body>
+</html>

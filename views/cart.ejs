@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cart.css">
+    <title>Shopping Cart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(()=>{
+            var items = document.getElementsByClassName("amount");
+            var sum = 0;
+            for(var i = 0; i < items.length; i++){
+                sum += parseInt(items[i].innerHTML.slice(1, document.querySelector(".amount").innerHTML.length), 10);
+            }
+            
+            var s2 = "$" + sum;
+            document.getElementById("total-price").innerHTML = s2;
+        })
+    </script>
+
+</head>
+
+<body>
+
+    <form action="/" method="get">
+        <button class="button">Home</button>
+    </form>
+
+    <div class="Cart-Container">
+
+        <div class="Header">
+            <h3 class="Heading">Shopping Cart</h3>
+        </div>
+
+        <% item.forEach(entries=>{ %>
+
+            <div class="item-box">
+
+                <div class="Cart-Items">
+                    <div class="image-box">
+                        <img src="../images/<%=entries.path%>" style="height: 120px;">
+                    </div>
+                    <div class="about">
+                        <h1 class="title">
+                            <%=entries.name%>
+                        </h1>
+                        <h3 class="subtitle">
+                            <%=entries.author%>
+                        </h3>
+                    </div>
+                    <div class="counter">
+                        <button id="<%=entries._id%>" class="btn" onclick="incrementValue(this)">+</button>
+                        <div class="count" id="<%=entries._id%>count">1</div>
+                        <button id="<%=entries._id%>" class="btn" onclick="decrementValue(this)">-</button>
+                    </div>
+                    <div class="prices">
+                        <div class="amount" id="<%=entries._id%>price">$<%=entries.price%>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+            </div>
+
+            <% }) %>
+
+                <div class="checkout">
+                    <div class="total">
+                        <div>
+                            <div class="Subtotal">Sub-Total</div>
+                        </div>
+                        <div class="total-amount" id="total-price">$0</div>
+
+                    </div>
+                    <div>
+                        <form action="checkout" method="post">
+                            <button class="button" >Checkout</button>
+                        </form>
+                    </div>
+                </div>
+
+    </div>
+
+
+    <script>
+        function incrementValue(element) {
+            var id = element.id;
+            var value = parseInt(document.getElementById(id + "count").innerHTML, 10);
+            value = isNaN(value) ? 0 : value;
+
+            var price = parseInt(document.getElementById(id + "price").innerHTML.slice(1, document.getElementById(id + "price").innerHTML.length), 10);
+            var total;
+
+
+            if (value < 10) {
+                value++;
+                document.getElementById(id + "count").innerHTML = value;
+            }
+
+            total = price / (value - 1) * value;
+            var s = "$" + total;
+            document.getElementById(id + "price").innerHTML = s;
+
+            var items = document.getElementsByClassName("amount");
+            var sum = 0;
+            for(var i = 0; i < items.length; i++){
+                sum += parseInt(items[i].innerHTML.slice(1, document.querySelector(".amount").innerHTML.length), 10);
+            }
+            
+            var s2 = "$" + sum;
+            document.getElementById("total-price").innerHTML = s2;
+            
+
+        }
+
+        function decrementValue(element) {
+            var id = element.id;
+            var value = parseInt(document.getElementById(id + "count").innerHTML, 10);
+            value = isNaN(value) ? 0 : value;
+
+            var price = parseInt(document.getElementById(id + "price").innerHTML.slice(1, document.getElementById(id+ "price").innerHTML.length), 10);
+            var total;
+
+            if (value > 1) {
+                value--;
+                document.getElementById(id + "count").innerHTML = value;
+                total = price - (price / (value + 1));
+                var s = "$" + total;
+                document.getElementById(id + "price").innerHTML = s;
+            }
+
+            var totalPrice = parseInt(document.getElementById("total-price").innerHTML.slice(1, document.getElementById("total-price").innerHTML.length), 10);
+
+            
+        }
+
+    </script>
+
+</body>
+
+</html>

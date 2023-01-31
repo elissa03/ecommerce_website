@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="signup.css">
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    
+    <div class="logo">
+		<a href="/" class="logo"> <i class="fas fa-book"></i> <span>Bookly</span> </a>
+	</div>
+
+	<form id="form" method="post">
+		<div class="container">
+			<h1>Login</h1>
+			<p>Please fill in your credentials to login.</p>
+			<hr>
+
+			<label for="email"><b>Email</b></label>
+			<input type="text" placeholder="Enter Email" name="email" >
+
+			<label for="psw"><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="password" >
+
+			<div class="clearfix">
+				<button type="submit" class="signupbtn">Login</button>
+			</div>
+		</div>
+	</form>
+
+	<div class="mssg bg-danger">
+		<span id="check" ></span>
+	</div>
+
+	<div id="LangTable">
+		<a href="/profile" id="profile"></a>
+	</div>
+
+	<div style="text-align: center;">
+		<span>Did you forget your password?</span>
+		<a style="color: dodgerblue;" href="/forget">Click here</a>
+	</div>
+
+	<div style="text-align: center;">
+		<span>Create a new Account?</span>
+		<a style="color: dodgerblue;" href="/signup">Register here</a>
+	</div>
+
+	<form style="text-align: center;" action="/" method="get">
+		<button class="cancelbtn">Cancel</button>
+	</form>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+$( "#form" ).submit(function(event) {
+	event.preventDefault();
+
+	$.ajax({
+		type: 'POST',
+		url: '/login',
+		data: $('#form').serialize(),
+		dataType: "json",
+		success: function(response){
+			//alert("a");
+			//console.log(response.Success);
+			$('#form')[0].reset();
+
+			document.getElementById("check").innerHTML=response.Success;
+				 //ADD THIS CODE
+				 setTimeout(function(){
+					 document.getElementById("check").innerHTML="";
+				 },3000);
+				 if (response.Success=="Success!") {
+					 document.getElementById("profile").click();
+				 };
+			 },
+			 error: function() {
+			 }
+		 })
+});
+
+});
+	</script>
+</body>
+</html>

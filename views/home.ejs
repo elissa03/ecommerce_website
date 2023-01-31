@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/9152a2c21e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Bookly</title>
+
+    <script type="text/javascript">
+
+        //hide icons according to priviledge
+        $(document).ready(function () {
+            //if not logged in
+            if (!<%= isLoggedIn %>){
+                //hide upload, cart, and profile icon
+                document.getElementById("upload").style.display = 'none';
+                document.getElementById("cart").style.display = 'none';
+                document.getElementById("profile").style.display = "none";
+                document.getElementById("view").style.display = 'none';
+            }
+            else {
+                if ("<%=role%>" == "user") {
+                    //hide upload & view button if user
+                    document.getElementById("upload").style.display = 'none';
+                    document.getElementById("view").style.display = 'none';
+                }
+                if("<%=role%>" == "admin"){
+                    document.getElementById("cart").style.display = 'none';
+                }
+                //display logout icon if logged in
+                document.getElementById("logout").style.display = 'inline'; 
+                //hide sign up button if logged in
+                document.getElementById("signup").style.display = 'none';
+            }
+        })
+
+    </script>
+</head>
+
+<body>
+    <!-- Header Section starts -->
+    <header class="header">
+
+        <!-- Header 1 -->
+        <div class="header-1">
+            <a href="#" class="logo"> <i class="fas fa-book"></i> bookly </a>
+
+
+            <div class="icons">
+            
+                <form method="get" action="shoppingcart" id="cart">
+                    <button id="login-btn" class="fas fa-shopping-cart"></button>
+                </form>
+                <form method="get" action="signup" id="signup">
+                    <button id="login-btn" class="fa-solid fa-right-to-bracket"></button>
+                </form>
+                <form method="get" action="logout" style="display: none;" id="logout">
+                    <button id="login-btn" class="fa-solid fa-right-from-bracket"></button>
+                </form>
+                <form method="get" action="profile" id="profile">
+                    <button id="login-btn" class="fa-solid fa-user"></button>
+                </form>
+                <form method="get" action="adminupload" id="upload">
+                    <button id="login-btn" class="fas fa-upload"></button>
+                </form>
+                <form method="get" action="users" id="view">
+                    <button id="login-btn" class="fa-solid fa-users-viewfinder"></button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Header 2 -->
+        <div class="header-2">
+            <nav class="navbar">
+                <a href="#home">home</a>
+                <form action="browse" method="get">
+                    <button>browse</button>
+                </form>
+                <a href="#arrivals">arrivals</a>
+                <a href="#reviews">reviews</a>
+            </nav>
+        </div>
+    </header>
+    <!-- Header section ends -->
+
+    <!-- Bottom navbar  -->
+    <nav class="bottom-navbar">
+        <a href="#home" class="fas fa-home"></a>
+        <a href="#browse" class="fas fa-list"></a>
+        <a href="#arrivals" class="fas fa-tags"></a>
+        <a href="#reviews" class="fas fa-comments"></a>
+    </nav>
+
+    <!-- Home Section starts  -->
+    <section class="home" id="home">
+
+        <div class="row">
+
+            <div class="content">
+                <h3>up to 75% off</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam deserunt nostrum accusamus. Nam alias
+                    sit necessitatibus, aliquid ex minima at!</p>
+                <a href="#" class="btn">shop now</a>
+            </div>
+
+            <div class="swiper books-slider">
+                <div class="swiper-wrapper">
+                    <a href="#" class="swiper-slide"><img src="images/book-1.png" alt=""></a>
+                    <a href="#" class="swiper-slide hide"><img src="images/book-2.png" alt=""></a>
+                    <a href="#" class="swiper-slide hide"><img src="images/book-3.png" alt=""></a>
+                    <a href="#" class="swiper-slide hide hidee"><img src="images/book-4.png" alt=""></a>
+                </div>
+                <img src="images/stand.png" class="stand" alt="">
+            </div>
+
+        </div>
+
+    </section>
+    <!-- Home Section ends  -->
+
+    <!-- Icons Section starts  -->
+    <section class="icons-container">
+
+        <div class="icons">
+            <i class="fas fa-shipping-fast"></i>
+            <div class="content">
+                <h3>free shipping</h3>
+                <p>order over $100</p>
+            </div>
+        </div>
+
+        <div class="icons">
+            <i class="fas fa-lock"></i>
+            <div class="content">
+                <h3>secure payment</h3>
+                <p>100 secure payment</p>
+            </div>
+        </div>
+
+        <div class="icons">
+            <i class="fas fa-redo-alt"></i>
+            <div class="content">
+                <h3>easy returns</h3>
+                <p>10 days returns</p>
+            </div>
+        </div>
+
+        <div class="icons">
+            <i class="fas fa-headset"></i>
+            <div class="content">
+                <h3>24/7 support</h3>
+                <p>call us anytime</p>
+            </div>
+        </div>
+
+    </section>
+    <!-- Icons Section ends -->
+
+    <!-- arrivals section starts  -->
+    <section class="arrivals" id="arrivals">
+
+        <h1 class="heading"> <span>new arrivals</span> </h1>
+
+        <div class="arrivals-container">
+
+            <div class="arrivals-box">
+                <div class="image">
+                    <img src="images/book-1.png" alt="">
+                </div>
+                <div class="content">
+                    <h3>new arrivals</h3>
+                    <div class="price">$15.99 <span>$20.99</span></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrivals-box">
+                <div class="image">
+                    <img src="images/book-2.png" alt="">
+                </div>
+                <div class="content">
+                    <h3>new arrivals</h3>
+                    <div class="price">$15.99 <span>$20.99</span></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrivals-box">
+                <div class="image">
+                    <img src="images/book-3.png" alt="">
+                </div>
+                <div class="content">
+                    <h3>new arrivals</h3>
+                    <div class="price">$15.99 <span>$20.99</span></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrivals-box">
+                <div class="image">
+                    <img src="images/book-4.png" alt="">
+                </div>
+                <div class="content">
+                    <h3>new arrivals</h3>
+                    <div class="price">$15.99 <span>$20.99</span></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrivals-box">
+                <div class="image">
+                    <img src="images/book-5.png" alt="">
+                </div>
+                <div class="content">
+                    <h3>new arrivals</h3>
+                    <div class="price">$15.99 <span>$20.99</span></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrivals-box">
+                <div class="image">
+                    <img src="images/book-6.png" alt="">
+                </div>
+                <div class="content">
+                    <h3>new arrivals</h3>
+                    <div class="price">$15.99 <span>$20.99</span></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrivals-box">
+                <div class="image">
+                    <img src="images/book-7.png" alt="">
+                </div>
+                <div class="content">
+                    <h3>new arrivals</h3>
+                    <div class="price">$15.99 <span>$20.99</span></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrivals-box">
+                <div class="image">
+                    <img src="images/book-8.png" alt="">
+                </div>
+                <div class="content">
+                    <h3>new arrivals</h3>
+                    <div class="price">$15.99 <span>$20.99</span></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrivals-box">
+                <div class="image">
+                    <img src="images/book-10.png" alt="">
+                </div>
+                <div class="content">
+                    <h3>new arrivals</h3>
+                    <div class="price">$15.99 <span>$20.99</span></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- arrivals section ends -->
+
+    <!-- Newsletter Section starts -->
+    <section class="newsletter">
+
+        <form action="thankyou" method="get">
+            <h3>subscribe for latest updates</h3>
+            <input type="email" name="" placeholder="enter your email" id="" class="box" required>
+            <button class="btn">Subscribe</button>
+        </form>
+
+    </section>
+    <!-- Newsletter Section ends -->
+
+    <!-- Deal Section starts  -->
+    <section class="deal">
+
+        <div class="content">
+            <h3>deal of the day</h3>
+            <h1>up to 50% off</h1>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde perspiciatis in atque dolore tempora
+                quaerat at fuga dolorum natus velit.</p>
+            <a href="/browse" class="btn">shop now</a>
+        </div>
+
+        <div class="image">
+            <img src="images/deal-img.jpg" alt="">
+        </div>
+
+    </section>
+    <!-- Deal Section ends -->
+
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+
+        <h1 class="heading"> <span>client's reviews</span> </h1>
+
+        <div class="reviews-container">
+
+            <div class="box">
+                <img src="images/pic-1.png" alt="">
+                <h3>john deo</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil ipsa placeat. Aperiam at
+                    sint, eos ex similique facere hic.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="images/pic-2.png" alt="">
+                <h3>john deo</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil ipsa placeat. Aperiam at
+                    sint, eos ex similique facere hic.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="images/pic-3.png" alt="">
+                <h3>john deo</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil ipsa placeat. Aperiam at
+                    sint, eos ex similique facere hic.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            <div class="box">
+                <img src="images/pic-4.png" alt="">
+                <h3>john deo</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil ipsa placeat. Aperiam at
+                    sint, eos ex similique facere hic.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="images/pic-5.png" alt="">
+                <h3>john deo</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil ipsa placeat. Aperiam at
+                    sint, eos ex similique facere hic.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="images/pic-6.png" alt="">
+                <h3>john deo</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil ipsa placeat. Aperiam at
+                    sint, eos ex similique facere hic.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- reviews section ends -->
+
+
+    <!-- footer section starts  -->
+
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>our locations</h3>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> india </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> USA </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> russia </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> france </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> japan </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> africa </a>
+            </div>
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="#home"> <i class="fas fa-arrow-right"></i> home </a>
+                <a href="#"><i class="fas fa-arrow-right"></i> browse </a>
+                <a href="#arrivals"> <i class="fas fa-arrow-right"></i> arrivals </a>
+                <a href="#reviews"> <i class="fas fa-arrow-right"></i> reviews </a>
+            </div>
+
+            <div class="box">
+                <h3>extra links</h3>
+                <a href="#"> <i class="fas fa-arrow-right"></i> account info </a>
+                <a href="/purchase"> <i class="fas fa-arrow-right"></i> ordered items </a>
+                <a href="#"> <i class="fas fa-arrow-right"></i> privacy policy </a>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+                <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+                <a href="#"> <i class="fas fa-envelope"></i> bookly@gmail.com </a>
+
+            </div>
+
+        </div>
+
+        <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin"></a>
+            <a href="#" class="fab fa-pinterest"></a>
+        </div>
+
+    </section>
+
+</body>
+
+</html>
